@@ -135,7 +135,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Ensure this directory exists
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'planner/static'),
+
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "planner:dashboard"
