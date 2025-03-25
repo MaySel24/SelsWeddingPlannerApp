@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-hin)-wy@mgoa*bfz@)jgj-+i4)p9tx6w(r0w&ngj!=b#s07k$+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["w"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -76,18 +76,25 @@ WSGI_APPLICATION = 'wedding_planner.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+import os
+import dj_database_url
+from pathlib import Path
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wedding_db',
-        'USER': 'SEL',
-        'PASSWORD': 'Snatcher24',
-        'HOST': 'localhost',
-        'PORT': '5432',
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+DATABASE_URL = os.getenv("postgresql://wedding_db_cjtm_user:4l6co1TSJu2WBWi8Yf2gzKx3cSNwkmtm@dpg-cvhihabqf0us73d2fgrg-a/wedding_db_cjtm")
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
     }
-}
-
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
