@@ -1,0 +1,24 @@
+{% extends "planner/base.html" %}
+
+{% block title %}Set Total Budget{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h2 class="text-center text-primary mb-3">Set Total Wedding Budget</h2>
+
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_amount" class="form-label">Total Budget (₵)</label>
+                <input type="number" name="amount" id="id_amount" class="form-control" value="{{ budget.amount }}" required>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Budget</button>
+                <a href="{% url 'planner:budget_list' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Budget List</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
