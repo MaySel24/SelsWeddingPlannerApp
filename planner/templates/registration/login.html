@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <style>
-        /* General Styling */
         body {
             font-family: 'Poppins', sans-serif;
             display: flex;
@@ -30,23 +29,15 @@
         }
 
         .login-card {
-            background: rgba(255, 255, 255, 0.9); /* Light transparency for modern effect */
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             text-align: center;
             width: 100%;
             max-width: 400px;
-            animation: fadeIn 0.8s ease-in-out;
         }
 
-        /* Fade-in Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Greeting Message */
         .greeting {
             font-size: 1.5rem;
             font-weight: 600;
@@ -60,17 +51,15 @@
             margin-bottom: 20px;
         }
 
-        /* Input Fields */
         .form-group {
             position: relative;
             margin-bottom: 20px;
         }
 
         .form-control {
-            padding: 12px;
+            padding: 12px 50px 12px 15px;
             font-size: 1rem;
             border-radius: 8px;
-            padding-left: 50px; /* Space for icons */
             border: 2px solid #ddd;
             transition: 0.3s ease-in-out;
         }
@@ -80,26 +69,15 @@
             box-shadow: 0 0 10px rgba(92, 103, 242, 0.3);
         }
 
-        .input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            font-size: 1.1rem;
-        }
-
         .password-toggle {
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #999;
             cursor: pointer;
             font-size: 1.1rem;
         }
 
-        /* Login Button */
         .btn-primary {
             background: linear-gradient(135deg, #5c67f2, #6a82fb);
             border: none;
@@ -116,7 +94,6 @@
             transform: scale(1.02);
         }
 
-        /* Forgot Password */
         .forgot-password {
             display: block;
             margin-top: 10px;
@@ -133,42 +110,35 @@
     </style>
 </head>
 <body>
-
     <div class="login-card">
         <p class="greeting" id="greeting-text"></p>
         <p class="subtext">Plan, organize, and enjoy a stress-free wedding with ease.</p>
-        <form method="post">
+
+        <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
 
-            <!-- Username Field -->
+            {% if form.errors %}
+                <div class="alert alert-danger">Invalid username or password. Please try again.</div>
+            {% endif %}
+
             <div class="form-group">
-                <i class="fas fa-user input-icon"></i>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username" required>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username" required autofocus>
             </div>
 
-            <!-- Password Field -->
             <div class="form-group">
-                <i class="fas fa-lock input-icon"></i>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required autocomplete="current-password">
                 <i class="fas fa-eye password-toggle" onclick="togglePassword()"></i>
             </div>
 
-            <!-- Login Button -->
             <button type="submit" class="btn btn-primary w-100">Login</button>
-
-            <!-- Fixed Forgot Password Link -->
             <a href="{% url 'password_reset' %}" class="forgot-password">Forgot Password?</a>
         </form>
     </div>
 
-    <!-- Bootstrap & JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // Password Toggle Function
         function togglePassword() {
-            var passwordField = document.getElementById("password");
-            var toggleIcon = document.querySelector(".password-toggle");
+            let passwordField = document.getElementById("password");
+            let toggleIcon = document.querySelector(".password-toggle");
             if (passwordField.type === "password") {
                 passwordField.type = "text";
                 toggleIcon.classList.replace("fa-eye", "fa-eye-slash");
@@ -178,7 +148,6 @@
             }
         }
 
-        // Greeting Message Based on Time of Day
         function updateGreeting() {
             let greetingText = document.getElementById("greeting-text");
             let currentHour = new Date().getHours();
@@ -194,6 +163,5 @@
 
         updateGreeting();
     </script>
-
 </body>
 </html>
