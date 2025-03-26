@@ -1,20 +1,21 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 import dj_database_url
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-from dotenv import load_dotenv
-load_dotenv()
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')  # Use environment variable for secret key
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "default-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['selsweddingplannerapp.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 # Application definition
 INSTALLED_APPS = [
@@ -31,8 +32,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -42,11 +43,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'wedding_planner.urls'
 
-# TEMPLATES Configuration
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'planner' / 'templates'],  # Fixed template directory path
+        'DIRS': [BASE_DIR / 'wedding_planner' / 'planner' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -61,13 +61,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wedding_planner.wsgi.application'
 
-# Database Configuration
-
-DATABASE_URL = os.getenv("DATABASE_URL")  # Use environment variable for DATABASE_URL
-
+# Database configuration
+DATABASE_URL = os.getenv("DATABASE_URL")
 if DATABASE_URL:
     DATABASES = {
-        "default": dj_database_url.config(default=os.getenv('DATABASE_URL'), conn_max_age=600)
+        "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
     }
 else:
     DATABASES = {
@@ -75,7 +73,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'wedding_db',
             'USER': 'SEL',
-            'PASSWORD': 'Snatcher24',  # Consider changing this password
+            'PASSWORD': 'Snatcher24',
             'HOST': 'localhost',
             'PORT': '5432',
         }
@@ -83,18 +81,10 @@ else:
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # Internationalization
@@ -103,28 +93,24 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# Static files settings
 STATIC_URL = '/static/'
-
-# Directory where static files will be collected
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Ensure this directory exists
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'planner/static'),
-]
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'planner/static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Login and logout settings
+# Authentication settings
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "planner:dashboard"
 LOGOUT_REDIRECT_URL = "planner:login"
 
-# CSRF settings for security
-CSRF_TRUSTED_ORIGINS = ['https://selsweddingplannerapp.onrender.com']
+# Security settings
+CSRF_TRUSTED_ORIGINS = ["https://selsweddingplannerapp.onrender.com"]
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Debugging database connection
+print("Loaded DATABASE_URL:", DATABASE_URL)
