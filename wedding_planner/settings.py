@@ -105,7 +105,11 @@ LOGIN_REDIRECT_URL = "planner:dashboard"
 LOGOUT_REDIRECT_URL = "planner:login"
 
 # Security settings
-CSRF_TRUSTED_ORIGINS = ["https://selsweddingplannerapp.onrender.com"]
+CSRF_TRUSTED_ORIGINS = [
+    'https://selsweddingplannerapp.onrender.com',
+    'http://localhost',
+    'http://127.0.0.1'
+]
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
