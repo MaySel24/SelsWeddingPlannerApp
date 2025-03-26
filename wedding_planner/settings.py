@@ -24,9 +24,10 @@ SECRET_KEY = 'django-insecure-hin)-wy@mgoa*bfz@)jgj-+i4)p9tx6w(r0w&ngj!=b#s07k$+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-import os
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS",'selsweddingplannerapp.onrender.com', 'localhost', '127.0.0.1')
 
+import os
+
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "selsweddingplannerapp.onrender.com,localhost,127.0.0.1").split(",")
 
 
 
