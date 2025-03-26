@@ -23,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hin)-wy@mgoa*bfz@)jgj-+i4)p9tx6w(r0w&ngj!=b#s07k$+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+import os
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS",'selsweddingplannerapp.onrender.com', 'localhost', '127.0.0.1')
 
-ALLOWED_HOSTS = ['selsweddingplannerapp.onrender.com', 'localhost', '127.0.0.1']
+
+
 
 
 # Application definition
@@ -83,7 +86,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATABASE_URL = os.getenv("postgresql://wedding_db_cjtm_user:4l6co1TSJu2WBWi8Yf2gzKx3cSNwkmtm@dpg-cvhihabqf0us73d2fgrg-a/wedding_db_cjtm")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
     DATABASES = {
@@ -152,7 +155,7 @@ LOGIN_REDIRECT_URL = "planner:dashboard"
 LOGOUT_REDIRECT_URL = "planner:login"
 
 CSRF_TRUSTED_ORIGINS = ['https://selsweddingplannerapp.onrender.com']
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 # Default primary key field type
