@@ -6,10 +6,13 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'Snatcher24')  # Use environment variable for secret key
+
+from dotenv import load_dotenv
+load_dotenv()
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')  # Use environment variable for secret key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
+DEBUG = False
 
 ALLOWED_HOSTS = ['selsweddingplannerapp.onrender.com', 'localhost', '127.0.0.1']
 
@@ -59,6 +62,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'wedding_planner.wsgi.application'
 
 # Database Configuration
+
 DATABASE_URL = os.getenv("DATABASE_URL")  # Use environment variable for DATABASE_URL
 
 if DATABASE_URL:
