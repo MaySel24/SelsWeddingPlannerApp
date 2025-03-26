@@ -82,7 +82,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATABASE_URL = os.getenv("postgresql://wedding_db_cjtm_user:4l6co1TSJu2WBWi8Yf2gzKx3cSNwkmtm@dpg-cvhihabqf0us73d2fgrg-a/wedding_db_cjtm")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
     DATABASES = {
@@ -92,10 +92,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'wedding_planner',
+            'NAME': 'wedding_db',
             'USER': 'SEL',
             'PASSWORD': 'Snatcher24',
-            'HOST': ['selsweddingplannerapp.onrender.com','localhost', '127:0.0.1'],
+            'HOST': 'localhost',
             'PORT': '5432',
         }
     }
