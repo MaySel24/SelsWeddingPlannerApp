@@ -76,7 +76,7 @@ else:
             'NAME': os.getenv("DB_NAME", "wedding_db"),
             'USER': os.getenv("DB_USER", "SEL"),
             'PASSWORD': os.getenv("DB_PASSWORD", "your-db-password"),
-            'HOST': os.getenv("DB_HOST", "127.0.0.1"),  # Use 127.0.0.1 instead of localhost
+            'HOST': "127.0.0.1",  # Use 127.0.0.1 instead of localhost
             'PORT': os.getenv("DB_PORT", "5432"),
         }
     }
