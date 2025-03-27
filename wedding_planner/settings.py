@@ -102,7 +102,7 @@ STATICFILES_DIRS = [BASE_DIR / 'planner' / 'static']
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Login/logout redirects
-LOGIN_URL = '/'
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'planner:dashboard'
 LOGOUT_REDIRECT_URL = 'planner:login'
 
