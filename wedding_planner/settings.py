@@ -60,6 +60,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'wedding_planner.wsgi.application'
 
 # Database Configuration
@@ -76,7 +77,7 @@ else:
             'NAME': os.getenv("DB_NAME", "wedding_db"),
             'USER': os.getenv("DB_USER", "SEL"),
             'PASSWORD': os.getenv("DB_PASSWORD", "your-db-password"),
-            'HOST': "127.0.0.1",  # Use 127.0.0.1 instead of localhost
+            'HOST': os.getenv("DB_HOST", "127.0.0.1"),  # Use 127.0.0.1 instead of localhost
             'PORT': os.getenv("DB_PORT", "5432"),
         }
     }
@@ -101,10 +102,18 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'planner' / 'static']
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# Security settings
+CSRF_TRUSTED_ORIGINS = ["https://selsweddingplannerapp.onrender.com"]
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 # Login/logout redirects
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'planner:dashboard'
 LOGOUT_REDIRECT_URL = 'planner:login'
+
+# Debugging database connection
+print("Loaded DATABASE_URL:", DATABASE_URL)
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
