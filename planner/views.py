@@ -392,21 +392,3 @@ def edit_tagline(request):
         form = TaglineForm(instance=profile)
 
     return render(request, 'planner/edit_tagline.html', {'form': form, 'current_tagline': profile.tagline})
-
-
-def login_view(request):
-    if request.user.is_authenticated:
-        return render(request, "planner/dashboard.html")  # Render dashboard directly
-
-    error = None  # Initialize error message
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        user = authenticate(request, username=username, password=password)
-        if user:
-            login(request, user)
-            return render(request, "planner/dashboard.html")  # Render dashboard
-        else:
-            error = "Invalid username or password"
-
-    return render(request, "planner/login.html", {"error": error})  # Stay on login page if failed
