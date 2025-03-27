@@ -68,12 +68,12 @@ DATABASE_URL = os.getenv("DATABASE_URL", "")
 
 if DATABASE_URL:
     DATABASES = {
-        "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=600, ssl_require=True)
+        "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=600, ssl_require=False)
     }
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.getenv("DB_NAME", "wedding_db"),
             'USER': os.getenv("DB_USER", "SEL"),
             'PASSWORD': os.getenv("DB_PASSWORD", "your-db-password"),
