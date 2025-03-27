@@ -1,0 +1,92 @@
+{% extends "planner/base.html" %}
+{% load widget_tweaks %}  <!-- Ensure widget_tweaks is loaded -->
+
+{% block title %}Add Vendor{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm p-4">
+                <h3 class="text-center text-success mb-4">
+                    <i class="fas fa-user-plus"></i> Add Vendor
+                </h3>
+
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error:</strong>
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li>{{ field|title }}: {{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.name.label }}</label>
+                        {{ form.name|add_class:"form-control" }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.service_type.label }}</label>
+                        {{ form.service_type|add_class:"form-control" }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.phone.label }}</label>
+                        {{ form.phone|add_class:"form-control" }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.email.label }}</label>
+                        {{ form.email|add_class:"form-control" }}
+                    </div>
+
+                    <div class="form-check mb-3">
+                        {{ form.contract_signed|add_class:"form-check-input" }}
+                        <label class="form-check-label">{{ form.contract_signed.label }}</label>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Add Vendor
+                        </button>
+                        <a href="{% url 'planner:vendor_list' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Vendor List
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Form Validation Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const forms = document.querySelectorAll(".needs-validation");
+    forms.forEach(function (form) {
+        form.addEventListener("submit", function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add("was-validated");
+        });
+    });
+
+    // Input highlight on focus
+    document.querySelectorAll("input, select, textarea").forEach(element => {
+        element.addEventListener("focus", () => element.classList.add("border-primary"));
+        element.addEventListener("blur", () => element.classList.remove("border-primary"));
+    });
+});
+</script>
+
+{% endblock %}

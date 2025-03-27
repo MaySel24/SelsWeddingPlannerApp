@@ -1,0 +1,305 @@
+/* ============================= */
+/* General Styles */
+/* ============================= */
+:root {
+    --theme-color: #007bff; /* Primary Theme Color */
+    --theme-bg-color: #f8f9fa; /* Light Background */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--theme-bg-color);
+    color: #212529;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* ============================= */
+/* Login Page Styling */
+/* ============================= */
+.login-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+    margin: auto;
+}
+
+/* Greeting & Subtext */
+.greeting {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.subtext {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+.form-group {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 40px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    border-color: #2575fc;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(37, 117, 252, 0.5);
+}
+
+/* Password Toggle */
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+/* Login Button */
+.btn-primary {
+    background: #2575fc;
+    border: none;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #1d5ed6;
+}
+
+/* Forgot Password */
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    color: #2575fc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Dark Mode - Login */
+body.dark-mode .login-card {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+/* ============================= */
+/* Wedding Colors Styling */
+/* ============================= */
+.color-box {
+    padding: 30px;
+    border-radius: 12px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Default Text Styling */
+.color-text {
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Darker text for light background colors */
+.color-box[style*="background-color: #fff"],
+.color-box[style*="background-color: #f8f9fa"],
+.color-box[style*="background-color: #eaeaea"],
+.color-box[style*="background-color: #ffffe0"],
+.color-box[style*="background-color: #ffebcd"],
+.color-box[style*="background-color: #f5f5dc"] {
+    color: #333 !important;
+    text-shadow: none;
+}
+
+/* ============================= */
+/* Card & Component Styling */
+/* ============================= */
+.card, .modal-content {
+    border-radius: 8px;
+    border: none;
+    background-color: #fff;
+}
+
+/* Buttons */
+.btn-theme {
+    background-color: var(--theme-color);
+    border-color: var(--theme-color);
+    color: white;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-theme:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* ============================= */
+/* Table Styling */
+/* ============================= */
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.table {
+    width: 100%;
+    background-color: #fff;
+    border-collapse: collapse;
+}
+
+.table th {
+    background-color: #343a40;
+    color: white;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+/* Fix for long text in tables */
+.email-col {
+    word-break: break-word;
+    max-width: 200px;
+}
+
+/* ============================= */
+/* Hover Effects */
+/* ============================= */
+.hover-effect:hover {
+    transform: translateY(-2px);
+    transition: 0.3s ease-in-out;
+    opacity: 0.9;
+}
+
+/* ============================= */
+/* Dark Mode */
+/* ============================= */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode .card,
+body.dark-mode .modal-content,
+body.dark-mode .table {
+    background-color: #1e1e1e;
+    color: white;
+    border-color: #444;
+}
+
+/* Buttons in Dark Mode */
+body.dark-mode .btn-light {
+    background-color: #333;
+    color: white;
+    border: none;
+}
+
+/* Dark Mode - Tables */
+body.dark-mode .table th {
+    background-color: #444;
+}
+
+body.dark-mode .table td {
+    background-color: #222;
+    color: white;
+    border-color: #444;
+}
+
+/* Dark Mode - Modals */
+body.dark-mode .modal-content {
+    background-color: #1e1e1e;
+}
+
+/* Dark Mode - Form Inputs */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #aaa;
+}
+
+/* ============================= */
+/* Responsive Design */
+/* ============================= */
+@media (max-width: 768px) {
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .table th, .table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .email-col {
+        max-width: 150px;
+    }
+
+    /* Smaller Color Blocks on Mobile */
+    .color-box {
+        font-size: 1.2rem;
+        min-height: 80px;
+        padding: 20px;
+    }
+
+    /* Responsive Login Card */
+    .login-card {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}

@@ -1,0 +1,27 @@
+{% extends "planner/base.html" %}
+
+{% block title %}Delete Budget Item{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body text-center">
+            <h2 class="text-danger">Delete Budget Item</h2>
+            <p class="lead">Are you sure you want to delete <strong>"{{ budget.category }}"</strong>?</p>
+
+            <form method="post" class="mt-3">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Yes, Delete
+                </button>
+                <a href="{% url 'planner:budget_list' %}" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- FontAwesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}

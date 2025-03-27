@@ -1,0 +1,16 @@
+{% extends "planner/base.html" %}
+
+{% block title %}Add Wedding Color{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Add Wedding Color</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
+{% endblock %}

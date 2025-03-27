@@ -1,0 +1,16 @@
+{% extends "planner/base.html" %}
+{% block content %}
+<div class="container text-center mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-danger">Confirm Deletion</h2>
+        <p class="fs-5">Are you sure you want to delete <strong>{{ guest.name }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Yes, Delete
+            </button>
+            <a href="{% url 'planner:guest_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
