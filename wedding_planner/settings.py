@@ -6,7 +6,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", "Snatcher24")  # Load from environment in production
+SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key")  # Load from environment in production
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -64,6 +64,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'wedding_planner.wsgi.application'
 
 # Database Configuration
+from dotenv import load_dotenv
+load_dotenv()
+
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 IS_PRODUCTION = "RENDER" in os.environ  # Adjust this condition as needed
 
@@ -79,7 +82,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv("DB_NAME", "wedding_db_x207"),
+            'NAME': os.getenv("DB_NAME", "wedding_db"),
             'USER': os.getenv("DB_USER", "SEL"),
             'PASSWORD': os.getenv("DB_PASSWORD", "your-db-password"),
             'HOST': os.getenv("DB_HOST", "127.0.0.1"),  # Use 127.0.0.1 instead of localhost
