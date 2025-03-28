@@ -121,7 +121,7 @@ LOGIN_REDIRECT_URL = 'planner:dashboard'
 LOGOUT_REDIRECT_URL = 'planner:login'
 
 # Debugging database connection
-print("Loaded DATABASE_URL:", DATABASE_URL)
+print("Loaded DATABASE_URL:", os.getenv("DATABASE_URL"))
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
