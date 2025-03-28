@@ -65,16 +65,21 @@ WSGI_APPLICATION = 'wedding_planner.wsgi.application'
 
 # Database Configuration
 DATABASE_URL = os.getenv("DATABASE_URL", "")
+IS_PRODUCTION = "RENDER" in os.environ  # Adjust this condition as needed
 
 if DATABASE_URL:
     DATABASES = {
-        "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=600, ssl_require=True)
+        "default": dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=IS_PRODUCTION  # Only require SSL in production
+        )
     }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv("DB_NAME", "wedding_db"),
+            'NAME': os.getenv("DB_NAME", "wedding_db_x207"),
             'USER': os.getenv("DB_USER", "SEL"),
             'PASSWORD': os.getenv("DB_PASSWORD", "your-db-password"),
             'HOST': os.getenv("DB_HOST", "127.0.0.1"),  # Use 127.0.0.1 instead of localhost
