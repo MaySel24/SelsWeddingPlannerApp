@@ -46,7 +46,7 @@ urlpatterns = [
     path('colors/', color_list, name='color_list'),
     path('colors/add/', add_color, name='add_color'),
     path('colors/edit/<int:pk>/', edit_color, name='edit_color'),
-    path('colors/delete/<int:pk>/', delete_color, name='delete_color'),
+    path('colors/delete/<int:color_id>/', delete_color, name='delete_color'),
 
     # ========================= TAGLINE =========================
     path('tagline/edit/', edit_tagline, name='edit_tagline'),
